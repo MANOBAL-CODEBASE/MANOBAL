@@ -1,4 +1,0 @@
-server.js
-folder structure frontend, backend
-frontend designs and screens decide & design
-frontend components buttons

@@ -1,3 +1,21 @@
+----------------------------------------------------------------------------------
+Current Tasks
+
+Kya bnana hai !
+frontend designs and screens decide & complete design !
+backend designs and screens decide & complete design !
+database designs and screens decide & complete design !
+
+----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
 Development Process
 
 checkout the process and all - https://chatgpt.com/share/672add75-46e0-8008-90db-77a76abe8726
@@ -9,10 +27,15 @@ Define Requirements:
 Detail the app's features: registration, personality assessment, task generation, task tracking, etc.
 Document these features as user stories in a shared platform like Jira, Trello, or GitHub Projects.
 Create a timeline, setting milestones for each major feature.
+
+
+
 Design Database Schema:
 
 Database schema design (e.g., MongoDB) includes tables for User, Task, and Assessment.
 Ensure each table has clear relationships, such as linking tasks to user accounts.
+
+
 Define Folder Structure:
 
 Backend: Use folders for controllers, models, routes, and middlewares.
@@ -112,3 +135,5 @@ Launch and Feedback:
 
 Share the app with a small group for user feedback.
 Fix any remaining minor bugs and prepare for a larger release.
+
+----------------------------------------------------------------------------------
