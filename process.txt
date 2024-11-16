@@ -1,12 +1,61 @@
 ----------------------------------------------------------------------------------
-Current Tasks
+Current Tasks---
 
-Kya bnana hai !
-frontend designs and screens decide & complete design !
-backend designs and screens decide & complete design !
-database designs and screens decide & complete design !
+Routing enable in frontend and backend
+Login/ register frontend and backend
+Login/ register Auth service & middleware
 
 ----------------------------------------------------------------------------------
+
+
+Modules:
+** Routing     
+frontend:-
+--> Navigation
+
+backend:-
+--> Routes
+
+
+** Login/Register
+ frontend:-
+ --> Login page
+ --> Register page
+ --> Auth service
+
+ backend:-
+ -->Login api
+ --> Register API
+ --> Auth middleware
+
+database:-
+--> User model
+
+
+** Assessment:-
+
+
+
+
+
+
+
+
+
+
+
+** Dashboard
+
+
+
+
+
+** Planning for 30, 60, 90 days
+
+
+
+
+** Logout
 
 
 
@@ -137,3 +186,45 @@ Share the app with a small group for user feedback.
 Fix any remaining minor bugs and prepare for a larger release.
 
 ----------------------------------------------------------------------------------
+
+
+
+Colour code--------------------
+
+/* CSS HEX */
+ --governor-bay: #3230be;
+--moon-raker: #dbc5f4;
+--jacksons-purple: #292799;
+--haiti: #08081f;
+--lucky-point: #1c1b6c;
+--bunting: #14144b;
+--manatee: #8c8cab;
+--lilac-bush: #9d74d6;
+--comet: #585778;
+--east-bay: #4c4c79;
+
+
+/* SCSS HEX */
+$governor-bay: #3230be;
+$moon-raker: #dbc5f4;
+$jacksons-purple: #292799;
+$haiti: #08081f;
+$lucky-point: #1c1b6c;
+$bunting: #14144b;
+$manatee: #8c8cab;
+$lilac-bush: #9d74d6;
+$comet: #585778;
+$east-bay: #4c4c79;
+
+
+/* SCSS RGB */
+--governor-bay: rgba(50,48,190,1);
+--moon-raker: rgba(219,197,244,1);
+--jacksons-purple: rgba(41,39,153,1);
+--haiti: rgba(8,8,31,1);
+--lucky-point: rgba(28,27,108,1);
+--bunting: rgba(20,20,75,1);
+--manatee: rgba(140,140,171,1);
+--lilac-bush: rgba(157,116,214,1);
+--comet: rgba(88,87,120,1);
+--east-bay: rgba(76,76,121,1);
