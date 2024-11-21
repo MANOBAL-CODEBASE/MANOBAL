@@ -3,6 +3,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const authRouter = require('./routes/authRoute');
 
 // Important Calls
 const app = express();
@@ -15,10 +16,8 @@ const PORT = process.env.PORT || 8000;
 const HOST = process.env.HOST;
 const MONGO_URL = process.env.MONGO_URL;
 
-// API Call
-app.get('/', (req, res) => {
-  res.send('<h1>Hello from Server</h1>');
-});
+// API Routes
+app.use('/api/auth', authRouter);
 
 // Server Listen & DB Connection
 mongoose
