@@ -6,7 +6,7 @@
 
 - **Frontend:**
 
-  - Navigation
+  - Navigation (Login , Register, Home)
 
 - **Backend:**
   - Routes
@@ -26,6 +26,7 @@
   - Login API
   - Register API
   - Auth Middleware
+  - Logout API
 
 - **Database:**
   - User Model
