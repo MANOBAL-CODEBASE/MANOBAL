@@ -5,6 +5,8 @@ const SignUp = () => {
   return (
     <View>
       <Text>SignUp Page</Text>
+      <Text>email</Text>
+      <Text>Password</Text>
     </View>
   )
 }
