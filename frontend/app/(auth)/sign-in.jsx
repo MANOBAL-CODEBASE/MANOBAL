@@ -6,8 +6,9 @@ const SignIn = () => {
   return (
     <View>
       <Text>SignIn Page</Text>
-      <Text> Don't have an account</Text>
-      <Link href="/sign-up"> Sign Up</Link>
+      <Text> Don't have an account?</Text>
+      {/* press the signup link */}
+      <Link href="/sign-up"> Sign Up</Link> 
     </View>
   );
 };
