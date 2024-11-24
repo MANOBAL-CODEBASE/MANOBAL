@@ -4,6 +4,7 @@ import { Redirect, router } from 'expo-router';
 import { Link } from 'expo-router';
 import CustomButton from '../components/CustomButton';
 import React from 'react';
+import "./global.css"
 
 export default function App() {
   return (
