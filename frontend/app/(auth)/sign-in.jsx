@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { router } from 'expo-router';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const LoginScreen = () => {
@@ -13,12 +14,12 @@ const LoginScreen = () => {
     }
 
     // Here you can integrate your authentication logic (e.g., API call to check user credentials)
-    Alert.alert('Login Successful', Welcome, ${email});
+    Alert.alert('Login Successful');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Sign In</Text>
       
       <TextInput
         style={styles.input}
@@ -40,7 +41,7 @@ const LoginScreen = () => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <Text style={styles.footerText}>Don't have an account? Sign up</Text>
+      <Text onPress={()=>{router.push('/sign-up')}} style={styles.footerText}>Don't have an account? Sign up</Text>
     </View>
   );
 };

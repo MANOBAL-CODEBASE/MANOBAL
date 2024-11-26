@@ -1,68 +1,107 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import React, { useState } from 'react';
+import { router } from 'expo-router';
 
 const SignUp = () => {
-  // States for email, password, and confirm password
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState(0);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // Handle the register logic
   const handleRegister = () => {
-    // Basic validation for empty fields
-    if (!email || !password || !confirmPassword) {
+    if (!name || !email || !gender || !age || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields.');
       return;
     }
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match.');
       return;
     }
 
-    // Here, you can integrate API call for registration (e.g., Firebase, REST API, etc.)
+    if (isNaN(age) || age <= 0) {
+      Alert.alert('Error', 'Please enter a valid age.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('Error', 'Please enter a valid email address.');
+      return;
+    }
+
     Alert.alert('Success', 'Account created successfully!');
+    console.log(age)
+    // Add API call logic here
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
 
-      {/* Email input */}
+      {/* Name Input */}
       <TextInput
         style={styles.input}
-        placeholder="Enter your email"
+        placeholder="Enter your Name"
+        value={name}
+        onChangeText={setName}
+      />
+
+      {/* Email Input */}
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your Email"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />
 
-      {/* Password input */}
+      {/* Gender Input */}
       <TextInput
         style={styles.input}
-        placeholder="Enter your password"
+        placeholder="Enter your Gender"
+        value={gender}
+        onChangeText={setGender}
+      />
+
+      {/* Age Input */}
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your Age"
+        keyboardType="numeric"
+        value={age}
+        onChangeText={setAge}
+      />
+
+      {/* Password Input */}
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Password"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      {/* Confirm password input */}
+      {/* Confirm Password Input */}
       <TextInput
         style={styles.input}
-        placeholder="Confirm your password"
+        placeholder="Confirm Password"
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
       />
 
-      {/* Register button */}
+      {/* Register Button */}
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
 
-      {/* Link to login page */}
-      <Text style={styles.footerText}>Already have an account? Login</Text>
+      {/* Link to Login Page */}
+      <Text style={styles.footerText} onPress={() => router.push('/sign-in')}>
+        Already have an account? Sign In
+      </Text>
     </View>
   );
 };
