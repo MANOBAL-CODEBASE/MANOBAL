@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
+import authService from '../services/authServices.js'; // Adjust path as necessary
 
 const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('');
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!name || !email || !gender || !age || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields.');
       return;
@@ -32,16 +33,21 @@ const SignUp = () => {
       return;
     }
 
-    Alert.alert('Success', 'Account created successfully!');
-    console.log(age)
-    // Add API call logic here
+    const userData = { name, email, gender, age: Number(age), password };
+
+    try {
+      const result = await authService.register(userData);
+      Alert.alert('Success', 'Account created successfully!');
+      router.push('/sign-in'); // Redirect to sign-in page
+    } catch (error) {
+      Alert.alert('Error', error);
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
 
-      {/* Name Input */}
       <TextInput
         style={styles.input}
         placeholder="Enter your Name"
@@ -49,7 +55,6 @@ const SignUp = () => {
         onChangeText={setName}
       />
 
-      {/* Email Input */}
       <TextInput
         style={styles.input}
         placeholder="Enter your Email"
@@ -58,7 +63,6 @@ const SignUp = () => {
         onChangeText={setEmail}
       />
 
-      {/* Gender Input */}
       <TextInput
         style={styles.input}
         placeholder="Enter your Gender"
@@ -66,7 +70,6 @@ const SignUp = () => {
         onChangeText={setGender}
       />
 
-      {/* Age Input */}
       <TextInput
         style={styles.input}
         placeholder="Enter your Age"
@@ -75,7 +78,6 @@ const SignUp = () => {
         onChangeText={setAge}
       />
 
-      {/* Password Input */}
       <TextInput
         style={styles.input}
         placeholder="Enter Password"
@@ -84,7 +86,6 @@ const SignUp = () => {
         onChangeText={setPassword}
       />
 
-      {/* Confirm Password Input */}
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
@@ -93,12 +94,10 @@ const SignUp = () => {
         onChangeText={setConfirmPassword}
       />
 
-      {/* Register Button */}
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
 
-      {/* Link to Login Page */}
       <Text style={styles.footerText} onPress={() => router.push('/sign-in')}>
         Already have an account? Sign In
       </Text>
@@ -107,6 +106,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
 
 const styles = StyleSheet.create({
   container: {
