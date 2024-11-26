@@ -13,7 +13,7 @@ const LoginScreen = () => {
     }
 
     // Here you can integrate your authentication logic (e.g., API call to check user credentials)
-   // Alert.alert('Login Successful', Welcome, ${email});
+    Alert.alert('Login Successful', Welcome, ${email});
   };
 
   return (
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#f4f4f4',
   },
   title: {
     fontSize: 32,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 50,
-    borderColor: 'black',
+    borderColor: '#ccc',
     borderWidth: 1,
     marginBottom: 15,
     paddingLeft: 10,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#000000',
+    backgroundColor: '#007bff',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
