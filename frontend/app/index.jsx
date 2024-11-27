@@ -14,6 +14,10 @@ export default function App() {
         title="Continue with Email"
         handlePress={() => router.push('/sign-in')} //after navigate to sign in page. Now, if you want to look signup page then press on the Sign Up link. Now you redirected to Sign Up page
       />
+      <CustomButton
+        title="Continue without Login"
+        handlePress={() => router.push('/home')} //after navigate to sign in page. Now, if you want to look signup page then press on the Sign Up link. Now you redirected to Sign Up page
+      />
     </View>
   );
 }
