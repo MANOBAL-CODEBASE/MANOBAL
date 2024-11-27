@@ -1,27 +1,49 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
-import { TextInput, TouchableOpacity, Alert } from 'react-native';
+import authService from '../services/authServices'; // Import your authentication service
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Simple validation and login function
-  const handleLogin = () => {
-    if (email === '' || password === '') {
+  // Login function
+  const handleLogin = async () => {
+    if (!email || !password) {
       Alert.alert('Error', 'Please fill in both fields.');
       return;
     }
 
-    // Here you can integrate your authentication logic (e.g., API call to check user credentials)
-    Alert.alert('Login Successful');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('Error', 'Please enter a valid email address.');
+      return;
+    }
+
+    try {
+      const userData = { email, password };
+      const response = await authService.login(userData);
+      Alert.alert('Success', 'Login successful!');
+      if (response.success) router.push('/home');
+    } catch (error) {
+      Alert.alert('Error', error.message || 'Login failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign In</Text>
-      
+
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -38,14 +60,24 @@ const LoginScreen = () => {
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity
+        style={[styles.button, isLoading && { backgroundColor: '#cccccc' }]}
+        onPress={handleLogin}
+        disabled={isLoading}
+      >
+        <Text style={styles.buttonText}>
+          {isLoading ? 'Loading...' : 'Login'}
+        </Text>
       </TouchableOpacity>
 
-      <Text onPress={()=>{router.push('/sign-up')}} style={styles.footerText}>Don't have an account? Sign up</Text>
+      <Text onPress={() => router.push('/sign-up')} style={styles.footerText}>
+        Don't have an account? Sign up
+      </Text>
     </View>
   );
 };
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -88,5 +120,3 @@ const styles = StyleSheet.create({
     color: '#007bff',
   },
 });
-
-export default LoginScreen;

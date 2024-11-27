@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
 import authService from '../services/authServices.js'; // Adjust path as necessary
@@ -106,7 +113,6 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
 
 const styles = StyleSheet.create({
   container: {
