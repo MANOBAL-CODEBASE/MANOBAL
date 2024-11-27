@@ -20,17 +20,10 @@
     "nativewind": "^4.1.23",
     "react": "18.2.0",
     "react-native": "0.74.5",
-<<<<<<< HEAD
-    "react-native-reanimated": "^3.16.2",
-    "react-native-safe-area-context": "^4.10.5",
-    "react-native-screens": "3.31.1",
-    "tailwindcss": "^3.4.15"
-=======
     "react-native-config": "^1.5.3",
     "react-native-dotenv": "^3.4.11",
     "react-native-safe-area-context": "4.10.5",
     "react-native-screens": "3.31.1"
->>>>>>> fd11d6d932cf106ea0a2fed38566d35a83bbce4a
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
