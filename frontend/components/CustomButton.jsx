@@ -40,20 +40,19 @@ const CustomButton = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: '#f1bd0e',
+    backgroundColor: '#007bff',
     borderRadius: 10,
     minHeight: 62,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
   },
   disabledButton: {
     opacity: 0.5,
   },
   buttonText: {
-    color: '#212f3d',
-    fontFamily: 'Roboto',
-    fontSize: 18,
+    color: '#fff',
   },
   loader: {
     marginLeft: 8,
