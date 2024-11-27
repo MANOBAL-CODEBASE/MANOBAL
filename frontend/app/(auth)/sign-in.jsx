@@ -70,8 +70,8 @@ const LoginScreen = () => {
         </Text>
       </TouchableOpacity>
 
-      <Text onPress={() => router.push('/sign-up')} style={styles.footerText}>
-        Don't have an account? Sign up
+      <Text style={styles.footerText1}>Don't have an account?
+      <Text onPress={() => router.push('/sign-up')} style={styles.footerText2}> Sign up</Text>
       </Text>
     </View>
   );
@@ -114,9 +114,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  footerText: {
-    marginTop: 20,
+  footerText1: {
+    marginTop: 25,
+    fontSize: 14,
+    color: '#080707',
+  },
+  footerText2: {
+    marginTop: 25,
     fontSize: 14,
     color: '#007bff',
   },
 });
+// #007bff

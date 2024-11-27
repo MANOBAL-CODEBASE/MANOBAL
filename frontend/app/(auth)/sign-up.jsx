@@ -104,9 +104,9 @@ const SignUp = () => {
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
-
-      <Text style={styles.footerText} onPress={() => router.push('/sign-in')}>
-        Already have an account? Sign In
+      
+      <Text style={styles.footerText1}>Already have an account?
+      <Text onPress={() => router.push('/sign-in')} style={styles.footerText2}> Sign in</Text>
       </Text>
     </View>
   );
@@ -149,8 +149,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  footerText: {
-    marginTop: 20,
+  footerText1: {
+    marginTop: 25,
+    fontSize: 14,
+    color: '#080707',
+  },
+  footerText2: {
+    marginTop: 25,
     fontSize: 14,
     color: '#007bff',
   },
