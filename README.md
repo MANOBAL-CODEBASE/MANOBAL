@@ -2,18 +2,22 @@
 
 ---
 
-### **Assessment**
+### *Assessment*
 
 ---
 
-### **Dashboard**
+### *Assessment*
 
 ---
 
-### **Planning for 7, 14, 21, 28 Days**
+### *Dashboard*
 
 ---
 
-### **Logout**
+### *Planning for 7, 14, 21, 28 Days*
+
+---
+
+### *Logout*
 
 ---
