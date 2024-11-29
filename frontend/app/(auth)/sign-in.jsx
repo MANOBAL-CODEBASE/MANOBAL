@@ -32,7 +32,8 @@ const LoginScreen = () => {
       const userData = { email, password };
       const response = await authService.login(userData);
       Alert.alert('Success', 'Login successful!');
-      if (response.success) router.push('/assessment');
+      if (response.data.success && !response.data.user.isAssesmentDone) router.push('/assessment');
+      if(response.data.success && response.data.user.isAssesmentDone) router.push('/home');
     } catch (error) {
       Alert.alert('Error', error.message || 'Login failed');
     } finally {

@@ -28,6 +28,7 @@ const register = async (req, res) => {
       email,
       age,
       gender,
+      isAssesmentDone:0,
       password: hashedPassword,
     });
 
@@ -94,6 +95,7 @@ const login = async (req, res) => {
         id: isUserExist._id,
         name: isUserExist.name,
         email: isUserExist.email,
+        isAssesmentDone:isUserExist.isAssesmentDone
       }, // Optional user data
     });
   } catch (error) {

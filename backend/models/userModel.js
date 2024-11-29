@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
      unique:true
     },
     gender: String,
+    isAssesmentDone:Boolean,
     age: Number,
     password: {
       type:String,

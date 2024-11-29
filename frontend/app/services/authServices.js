@@ -18,13 +18,9 @@ const authService = {
       const url = `${BASE_URL}/api/auth/login`;
       const response = await axios.post(url, userData);
       const token = response.data.token;
-      if (typeof token !== 'string') {
-        token = JSON.stringify(token);
-      }
       await AsyncStorage.clear();
-
       await AsyncStorage.setItem('manobal', token);
-      return response.data;
+      return response;
     } catch (error) {
       throw error;
     }
