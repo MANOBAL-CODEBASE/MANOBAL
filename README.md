@@ -30,3 +30,8 @@
 
 
 
+# App Details
+
+-- Authentication and Authorization 
+-- User Assessment
+-- Personalised learning plans with task asigning features
