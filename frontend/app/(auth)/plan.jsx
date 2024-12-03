@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import React, { useState } from 'react';
 import CustomButton from '../../components/CustomButton';
+import { router } from 'expo-router';
 
 const Plan = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -43,15 +44,22 @@ const Plan = () => {
       <View style={styles.btnContainer}>
         <CustomButton
           title="Submit"
-          handlePress={() =>
-          
-            Alert.alert(
-              'Selected Option',
-              selectedOption
-                ? `You selected: ${options.find((opt) => opt.id === selectedOption)?.label}`
-                : 'No option selected'
-            )
-          }
+          handlePress={() => {
+  Alert.alert(
+    'Selected Option',
+    selectedOption
+      ? `You selected: ${options.find((opt) => opt.id === selectedOption)?.label}`
+      : 'No option selected',
+    [
+      {
+        text: 'OK',
+        onPress: () => {
+          router.push('/home');
+        }
+      }
+    ]
+  );
+}}
         />
       </View>
     </View>

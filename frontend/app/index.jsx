@@ -13,10 +13,10 @@ export default function App() {
         title="Continue with Email"
         handlePress={() => router.push('/sign-in')} 
       />
-      <CustomButton
+      {/* <CustomButton
         title="Continue with Plan"
         handlePress={() => router.push('/plan')} 
-      />
+      /> */}
       <CustomButton
         title="Continue without Login"
         handlePress={() => router.push('/home')} 
