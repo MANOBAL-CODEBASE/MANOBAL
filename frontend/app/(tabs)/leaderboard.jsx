@@ -1,20 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const tasks = () => {
+const leaderboard = () => {
   return (
     <View style={styles.container}>
-      <Text>Tasks</Text>
+      <Text>Leaderboard</Text>
     </View>
   );
 };
 
-export default tasks;
+export default leaderboard;
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });

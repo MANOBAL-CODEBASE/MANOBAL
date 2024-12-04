@@ -6,7 +6,7 @@ import CustomButton from '../../components/CustomButton';
 import { router } from 'expo-router';
 
 const Dashboard = () => {
-  const progress = 62; // Example progress value
+  const progress = 57; // Example progress value
   const strokeDasharray = 2 * Math.PI * 40; // Circle circumference
   const strokeDashoffset = strokeDasharray - (progress / 100) * strokeDasharray;
 

@@ -4,36 +4,33 @@ import { Redirect, router } from 'expo-router';
 import { Link } from 'expo-router';
 import CustomButton from '../components/CustomButton';
 import React from 'react';
-import Logo from "./assets/manobalLogo.png";
+import logo from '../assets/images/manobalLogo.png';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.bs1}>
-        <Image
-          source={Logo}
-          style={styles.logo}
-        />
+        <Image source={logo} style={styles.logo} />
       </View>
       <View style={styles.bs2}>
-      <CustomButton 
-        containerStyles={styles.btn}
-        textStyles={styles.btnText}
-        title="Continue with Email"
-        handlePress={() => router.push('/sign-in')} 
-      />
+        <CustomButton
+          containerStyles={styles.btn}
+          textStyles={styles.btnText}
+          title="Continue with Email"
+          handlePress={() => router.push('/sign-in')}
+        />
       </View>
       {/* <CustomButton
         title="Continue with Plan"
         handlePress={() => router.push('/plan')} 
       /> */}
       <View style={styles.bs2}>
-      <CustomButton 
-        containerStyles={styles.btn} 
-        textStyles={styles.btnText}
-        title="Continue without Login"
-        handlePress={() => router.push('/home')} 
-      />
+        <CustomButton
+          containerStyles={styles.btn}
+          textStyles={styles.btnText}
+          title="Continue without Login"
+          handlePress={() => router.push('/home')}
+        />
       </View>
     </View>
   );
@@ -56,27 +53,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', // Required for shadow visibility
     borderRadius: 125, // Matches the image's borderRadius for rounded corners
     padding: 6, // Adds some space for shadow visibility
-    marginBottom : 100,
+    marginBottom: 100,
   },
   logo: {
     height: 250,
     width: 250,
     borderRadius: 125, // Rounded corners (half of width/height for circle)
-    
   },
-  btn :{
-    width : 270,
-    marginVertical : 7
+  btn: {
+    width: 270,
+    marginVertical: 7,
   },
-  btnText :{
-    fontSize : 18,
-    fontWeight : 500
+  btnText: {
+    fontSize: 18,
+    fontWeight: 500,
   },
   bs2: {
     shadowColor: '#000', // Shadow color
     shadowOffset: { width: 0, height: 5 }, // Shadow offset
     shadowOpacity: 0.3, // Shadow opacity
     shadowRadius: 10, // Shadow blur radius
-    borderRadius :10
+    borderRadius: 10,
   },
 });
