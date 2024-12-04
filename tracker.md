@@ -7,7 +7,6 @@
 
 
  # Current Tasks
- > Start Page - Design                              - Khushi
  > Start Page - Continue With Google Implementation - Nitish
  > 3 Component Buttons Design                       - Prabhat
  > Sign In, Sign Up Page                            - Prince
