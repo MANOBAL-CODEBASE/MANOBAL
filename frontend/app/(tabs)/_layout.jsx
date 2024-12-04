@@ -28,8 +28,8 @@ const TabsLayout = () => {
     <>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: '#FFA001',
-          tabBarInactiveTintColor: '#CDCDE0',
+          tabBarActiveTintColor: '#a34100',
+          tabBarInactiveTintColor: '#000',
           tabBarShowLabel: false,
           tabBarStyle: styles.tabBarStyle,
         }}
@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     fontSize: 9.5,
   },
   tabBarStyle: {
-    backgroundColor: '#161622',
+    backgroundColor: '#fff',
     borderTopWidth: 1,
-    borderTopColor: '#232533',
+    borderTopColor: '#fff',
     height: 74,
     borderTopLeftRadius: 19,
     borderTopRightRadius: 19,
