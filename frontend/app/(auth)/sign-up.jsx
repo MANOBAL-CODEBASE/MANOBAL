@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#007bff',
+    backgroundColor: '#a34100',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -157,6 +157,6 @@ const styles = StyleSheet.create({
   footerText2: {
     marginTop: 25,
     fontSize: 14,
-    color: '#007bff',
+    color: '#800000',
   },
 });

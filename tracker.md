@@ -1,15 +1,14 @@
 # Colors 
  > Primary - White
  > Secondary - Black
- > 3rd - Dark Orange
- > 4th - Dark Red
+ > 3rd - #a34100
+ > 4th - #800000
  > 5th - Dark Yellow
 
 
  # Current Tasks
  > Start Page - Continue With Google Implementation - Nitish
- > 3 Component Buttons Design                       - Prabhat
- > Sign In, Sign Up Page                            - Prince
+ > Sign In, Sign Up Page logo at top 50*            - Prabhat
  > Tabs - 5 - Home, Chat, Leaderboard,              - Prince
    Community, Contact Us
 

@@ -69,15 +69,14 @@ const styles = StyleSheet.create({
     marginVertical : 7
   },
   btnText :{
-    fontSize : 20,
-    fontWeight : 600
+    fontSize : 18,
+    fontWeight : 500
   },
   bs2: {
     shadowColor: '#000', // Shadow color
-    shadowOffset: { width: 0, height: 4 }, // Shadow offset
+    shadowOffset: { width: 0, height: 5 }, // Shadow offset
     shadowOpacity: 0.3, // Shadow opacity
-    shadowRadius: 4, // Shadow blur radius
-    elevation: 5, // Elevation for Android
+    shadowRadius: 10, // Shadow blur radius
     borderRadius :10
   },
 });
