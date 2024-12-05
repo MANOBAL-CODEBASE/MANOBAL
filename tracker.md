@@ -7,9 +7,9 @@
 
 
  # Current Tasks
- > PPT                                              - All - 5th,6th
- > Research Paper                                   - All - 5th,6th
- > Github | Mongo DB                                - 
- > Codebase                                         -
- > Demo for Completed Work                          -
+ > PPT                                              
+ > Research Paper                                   
+ > Github | Mongo DB                                 
+ > Codebase                                         
+ > Demo for Completed Work                          
  
