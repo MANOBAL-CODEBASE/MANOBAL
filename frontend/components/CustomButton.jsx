@@ -40,7 +40,7 @@ const CustomButton = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#a34100',
     borderRadius: 10,
     minHeight: 62,
     flexDirection: 'row',
