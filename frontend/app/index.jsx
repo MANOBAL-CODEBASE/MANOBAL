@@ -20,10 +20,6 @@ export default function App() {
           handlePress={() => router.push('/sign-in')}
         />
       </View>
-      {/* <CustomButton
-        title="Continue with Plan"
-        handlePress={() => router.push('/plan')} 
-      /> */}
       <View style={styles.bs2}>
         <CustomButton
           containerStyles={styles.btn}
