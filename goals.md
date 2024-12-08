@@ -1,6 +1,5 @@
 # Start Page
 > Continue With Email
-> Continue With Google
 
 # Authentication
 > Sign In     
@@ -12,17 +11,10 @@
 
 # Dashboard / Home
 > Logout Button
-> Edit Profile
 > Today's Tasks
-> Notifications
 
-# Daily Tasks & Activities
+# Daily Tasks
 
 # Live Communication
 
-# Leaderboard
-
-# Community Forum
-> Community Post (Verified by AI)
-
-# Contact Us
+# Our Developers
