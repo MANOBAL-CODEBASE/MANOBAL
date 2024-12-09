@@ -7,7 +7,7 @@
 
 # User Assessment
 
-# Plan Selection & Generation
+# Plan Selection
 
 # Dashboard / Home
 > Logout Button
