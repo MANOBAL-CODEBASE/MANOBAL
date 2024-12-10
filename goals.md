@@ -1,20 +1,20 @@
 # Start Page
 > Continue With Email
 
-# Authentication
-> Sign In     
-> Sign Up                          
+# Sign In 
 
-# User Assessment
+# Sign Up                          
 
-# Plan Selection
+# Assessment
 
-# Dashboard / Home
+# Home
 > Logout Button
-> Today's Tasks
+> Streaks Icon
+> Profile & Progress Card
+> Today's Task Card
 
-# Daily Tasks
+# Today's Tasks
 
-# Live Communication
+# Communication
 
-# Our Developers
+# Developers
