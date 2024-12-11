@@ -1,3 +1,5 @@
+# Frontend Pages --------
+
 # Start Page
 > Continue With Email
 
@@ -18,3 +20,22 @@
 # Communication
 
 # Developers
+
+-------------------------------------
+
+# Backend APIS----------
+
+# Register
+
+# Login
+
+# Assessment --
+
+# Home Page APIs
+> getProfile
+> getStreaks
+> todayTask
+
+# Task Generation --
+
+# Communication --
