@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/authRoute');
+const mainRouter = require('./routes/mainRoute');
 
 // Important Calls
 const app = express();
@@ -18,6 +19,7 @@ const MONGO_URL = process.env.MONGO_URL;
 
 // API Routes
 app.use('/api/auth', authRouter);
+app.use('/api/main', mainRouter);
 
 // Server Listen & DB Connection
 mongoose
