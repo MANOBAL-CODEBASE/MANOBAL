@@ -28,6 +28,7 @@ export default function App() {
           handlePress={() => router.push('/home')}
         />
       </View>
+      <Text className='bg-blue-600 m-4'>Hii there </Text>
     </View>
   );
 }
