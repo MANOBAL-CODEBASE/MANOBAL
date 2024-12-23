@@ -4,7 +4,7 @@ import React from 'react';
 const leaderboard = () => {
   return (
     <View style={styles.container}>
-      <Text>Leaderboard</Text>
+      <Text className='text-2xl font-JakartaBold'>Leaderboard</Text>
     </View>
   );
 };

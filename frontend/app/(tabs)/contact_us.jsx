@@ -1,20 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const contact_us = () => {
+const contact = () => {
   return (
-    <View style={styles.container}>
-      <Text>Contact Us</Text>
+    <View className='flex-1 items-center justify-center bg-gray h-full '>
+      <Text className='text-2xl font-JakartaBold'> Contact Us</Text>
     </View>
   )
 }
 
-export default contact_us
+export default contact
 
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
-  }
-})
+const styles = StyleSheet.create({})
