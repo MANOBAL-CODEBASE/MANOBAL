@@ -39,9 +39,9 @@ const register = async (req, res) => {
       message: 'User has been registered sucessfully!!',
     });
   } catch (error) {
-    return res.status(400).send({
+    return res.status(200).send({
       sucess: false,
-      message: error,
+      message: error
     });
   }
 };
@@ -99,9 +99,9 @@ const login = async (req, res) => {
       }, // Optional user data
     });
   } catch (error) {
-    return res.status(500).send({
+    return res.status(200).send({
       success: false,
-      message: 'Something went wrong',
+      message: error
     });
   }
 };
