@@ -1,310 +1,23 @@
-// import { StyleSheet, Text, View } from 'react-native';
-// import React, { useState, useEffect } from 'react';
-// import authService from '../services/authServices';
-
-// const Assessment = () => {
-//   const [token, setToken] = useState(null);
-
-//   useEffect(() => {
-//     const fetchToken = async () => {
-//       try {
-//         const retrievedToken = await authService.getToken();
-//         setToken(retrievedToken);
-//       } catch (error) {
-//         console.error('Error fetching token:', error);
-//       }
-//     };
-
-//     fetchToken();
-//   }, []); // Run only once when the component mounts
-
-//   return (
-//     <View style={styles.center}>
-//       <Text>Assessment</Text>
-//       <Text>{token ? token : 'No token found'}</Text>
-//     </View>
-//   );
-// };
-
-// export default Assessment;
-
-// const styles = StyleSheet.create({
-//   center: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-// });
-
-// import React, { useState } from 'react';
-// import {
-//   StyleSheet,
-//   Text,
-//   View,
-//   TouchableOpacity,
-//   ScrollView,
-//   Button,
-// } from 'react-native';
-
-// const AssessmentScreen = () => {
-//   const questions = [
-//     {
-//       id: 1,
-//       question: 'How do you usually handle stress?',
-//       options: [
-//         'I stay calm',
-//         'I get anxious',
-//         'I seek help',
-//         'I try to distract myself',
-//       ],
-//     },
-//     {
-//       id: 2,
-//       question: 'How do you feel about public speaking?',
-//       options: [
-//         'I enjoy it',
-//         'I feel nervous',
-//         'I avoid it',
-//         "I'm okay with it",
-//       ],
-//     },
-//     {
-//       id: 3,
-//       question: 'When faced with challenges, I tend to:',
-//       options: [
-//         'Stay positive',
-//         'Give up',
-//         'Look for solutions',
-//         'Wait for it to pass',
-//       ],
-//     },
-//     {
-//       id: 4,
-//       question: 'How would you rate your time management skills?',
-//       options: ['Excellent', 'Good', 'Average', 'Poor'],
-//     },
-//     // Add more questions as needed
-//   ];
-
-//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-//   const [selectedAnswers, setSelectedAnswers] = useState({});
-
-//   // Handle answer selection
-//   const handleAnswerSelect = (questionId, answer) => {
-//     setSelectedAnswers((prevAnswers) => ({
-//       ...prevAnswers,
-//       [questionId]: answer,
-//     }));
-//   };
-
-//   // Go to the next question
-//   const nextQuestion = () => {
-//     if (currentQuestionIndex < questions.length - 1) {
-//       setCurrentQuestionIndex(currentQuestionIndex + 1);
-//     }
-//   };
-
-//   // Go to the previous question
-//   const previousQuestion = () => {
-//     if (currentQuestionIndex > 0) {
-//       setCurrentQuestionIndex(currentQuestionIndex - 1);
-//     }
-//   };
-
-//   // Submit the assessment
-//   const handleSubmit = () => {
-//     alert('Assessment Submitted!');
-//     console.log('User answers:', selectedAnswers);
-//   };
-
-//   // Render the current question and options
-//   const renderCurrentQuestion = () => {
-//     const currentQuestion = questions[currentQuestionIndex];
-//     return (
-//       <View style={styles.questionContainer}>
-//         <Text style={styles.questionText}>{currentQuestion.question}</Text>
-//         {currentQuestion.options.map((option, index) => (
-//           <TouchableOpacity
-//             key={index}
-//             style={[
-//               styles.optionButton,
-//               selectedAnswers[currentQuestion.id] === option &&
-//                 styles.selectedOption,
-//             ]}
-//             onPress={() => handleAnswerSelect(currentQuestion.id, option)}
-//           >
-//             <Text style={styles.optionText}>{option}</Text>
-//           </TouchableOpacity>
-//         ))}
-//       </View>
-//     );
-//   };
-
-//   return (
-//     <ScrollView style={styles.container}>
-//       {/* Header */}
-//       <View style={styles.header}>
-//         <Text style={styles.username}>Hi, Prince Kumar!</Text>
-//         <Text style={styles.assessmentTitle}>
-//           Complete Your Personality Assessment
-//         </Text>
-//       </View>
-
-//       {/* Current Question */}
-//       {renderCurrentQuestion()}
-
-//       {/* Navigation Buttons */}
-//       <View style={styles.buttonContainer}>
-//         {currentQuestionIndex > 0 && (
-//           <TouchableOpacity style={styles.navButton} onPress={previousQuestion}>
-//             <Text style={styles.navButtonText}>Previous</Text>
-//           </TouchableOpacity>
-//         )}
-
-//         {currentQuestionIndex < questions.length - 1 ? (
-//           <TouchableOpacity style={styles.navButton} onPress={nextQuestion}>
-//             <Text style={styles.navButtonText}>Next</Text>
-//           </TouchableOpacity>
-//         ) : (
-//           <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-//             <Text
-//               handlePress={() => router.push('/plan')}
-//               style={styles.submitButtonText}
-//             >
-//               Submit
-//             </Text>
-//           </TouchableOpacity>
-//         )}
-//       </View>
-//     </ScrollView>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 40,
-//     backgroundColor: '#f9f9f9',
-//   },
-//   header: {
-//     marginBottom: 30,
-//     alignItems: 'center',
-//   },
-//   username: {
-//     fontSize: 28,
-//     fontWeight: 'bold',
-//     color: '#333',
-//   },
-//   assessmentTitle: {
-//     fontSize: 18,
-//     color: '#555',
-//     marginTop: 10,
-//   },
-//   questionContainer: {
-//     backgroundColor: '#fff',
-//     padding: 10,
-//     marginBottom: 15,
-//     borderRadius: 10,
-//     shadowColor: '#000',
-//     shadowOffset: { width: 0, height: 2 },
-//     shadowOpacity: 0.1,
-//     shadowRadius: 5,
-//     elevation: 3,
-//   },
-//   questionText: {
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//     color: '#333',
-//     marginBottom: 10,
-//   },
-//   optionButton: {
-//     padding: 12,
-//     marginVertical: 5,
-//     backgroundColor: '#fff',
-//     borderRadius: 5,
-//     borderWidth: 1,
-//     borderColor: '#007bff',
-//   },
-//   selectedOption: {
-//     backgroundColor: '#007bff',
-//   },
-//   optionText: {
-//     fontSize: 16,
-//     color: '#333',
-//     textAlign: 'center',
-//   },
-//   buttonContainer: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     marginTop: 20,
-//   },
-//   navButton: {
-//     backgroundColor: '#007bff',
-//     padding: 12,
-//     borderRadius: 5,
-//     width: '48%',
-//     alignItems: 'center',
-//   },
-//   navButtonText: {
-//     color: '#fff',
-//     fontSize: 16,
-//     fontWeight: 'bold',
-//   },
-//   submitButton: {
-//     backgroundColor: '#28a745',
-//     padding: 12,
-//     borderRadius: 5,
-//     width: '50%',
-//     alignItems: 'center',
-//   },
-//   submitButtonText: {
-//     color: '#fff',
-//     fontSize: 16,
-//     fontWeight: 'bold',
-//   },
-// });
-
-// export default AssessmentScreen;
-
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  FlatList,
-  Alert,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import mainService from '../services/mainService';
 
 const AssessmentPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questions, setQuestions] = useState([]);
   const navigation = useNavigation();
+  const token = 'your_token_here'; // Replace with actual token
 
-  const questions = [
-    {
-      id: 1,
-      question: "How do you usually handle stress?",
-      options: ["I stay calm", "I get anxious", "I seek help", "I try to distract myself"],
-    },
-    {
-      id: 2,
-      question: "How do you feel about public speaking?",
-      options: ["I enjoy it", "I feel nervous", "I avoid it", "I'm okay with it"],
-    },
-    {
-      id: 3,
-      question: "When faced with challenges, I tend to:",
-      options: ["Stay positive", "Give up", "Look for solutions", "Wait for it to pass"],
-    },
-    {
-      id: 4,
-      question: "How would you rate your time management skills?",
-      options: ["Excellent", "Good", "Average", "Poor"],
-    },
-    // Add more questions here
-  ];
+  const getQuestions = async () => {
+    try {
+      const response = await mainService.getQuestions(); // Fetch questions asynchronously
+      setQuestions(response);
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+    }
+  };
 
   const handleAnswerSelect = (questionId, answer) => {
     setSelectedAnswers((prevState) => ({
@@ -329,10 +42,20 @@ const AssessmentPage = () => {
     return questions.every((item) => selectedAnswers[item.id]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isAllAnswered()) {
-      // Navigate to '/plan' screen
-      navigation.navigate('plan');
+      const formattedAnswers = questions.map((question) => ({
+        id: question.id,
+        _id: question._id,
+        answer: selectedAnswers[question.id],
+      }));
+
+      try {
+        await mainService.assessment(formattedAnswers);
+        navigation.navigate('plan'); // Assuming you navigate to 'plan' after submitting
+      } catch (error) {
+        Alert.alert('Error', 'There was an issue submitting your answers.');
+      }
     } else {
       Alert.alert(
         'Incomplete',
@@ -341,13 +64,17 @@ const AssessmentPage = () => {
     }
   };
 
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
   const renderQuestion = ({ item }) => {
     return (
       <View style={styles.questionContainer}>
         <Text style={styles.questionText}>{item.question}</Text>
-        {item.options.map((option, index) => (
+        {[1, 2, 3, 4, 5].map((option) => (
           <TouchableOpacity
-            key={index}
+            key={option}
             style={[
               styles.optionButton,
               selectedAnswers[item.id] === option && styles.selectedOption,
@@ -361,28 +88,31 @@ const AssessmentPage = () => {
     );
   };
 
+  if (questions.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading questions...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.username}>Hi, Prince!</Text>
         <Text style={styles.assessmentTitle}>Complete Your Assessment</Text>
       </View>
 
-      {/* Question Slider */}
       <View style={styles.questionContainerBox}>
-
-      <FlatList
-        data={[questions[currentQuestionIndex]]} // Only show the current question
-        renderItem={renderQuestion}
-        keyExtractor={(item) => item.id.toString()}
-        // horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.questionSlider}
+        <FlatList
+          data={[questions[currentQuestionIndex]]} // Only show the current question
+          renderItem={renderQuestion}
+          keyExtractor={(item) => item?.id?.toString()}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.questionSlider}
         />
-        </View>
+      </View>
 
-      {/* Navigation Buttons */}
       <View style={styles.navigationButtons}>
         <TouchableOpacity
           style={styles.navButton}
@@ -400,7 +130,6 @@ const AssessmentPage = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Submit Button */}
       <TouchableOpacity
         style={[styles.submitButton, !isAllAnswered() && styles.disabledButton]}
         onPress={handleSubmit}
@@ -435,8 +164,7 @@ const styles = StyleSheet.create({
   },
   questionSlider: {
     marginVertical: 20,
-    justifyContent:'center',
-    
+    justifyContent: 'center',
     alignItems: 'center',
   },
   questionContainer: {
@@ -444,14 +172,13 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 15,
     borderRadius: 10,
-    shadowColor: '#000000',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.6,
     shadowRadius: 5,
     elevation: 6,
-    width: 320, // Adjust the width for the slider effect
+    width: 320,
     alignItems: 'center',
-    // flexDirection:'row'
   },
   questionText: {
     fontSize: 18,
@@ -460,13 +187,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
   },
-  questionContainerBox:{
+  questionContainerBox: {
     flex: 1,
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
-    // backgroundColor:'plum',
-
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   optionButton: {
     padding: 12,
@@ -488,8 +213,7 @@ const styles = StyleSheet.create({
   navigationButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginTop: 40,
-    marginBottom: 120
+    marginBottom: 120,
   },
   navButton: {
     backgroundColor: '#007bff',
@@ -515,7 +239,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   disabledButton: {
-    backgroundColor: '#b0c4de', // Lighter color when disabled
+    backgroundColor: '#b0c4de',
   },
 });
 
