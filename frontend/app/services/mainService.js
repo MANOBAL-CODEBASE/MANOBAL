@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authService from './authServices';
 
-const BASE_URL = 'http://192.168.1.42:4000';
+const BASE_URL = 'http://192.168.1.5:4000';
 
 const mainService = {
   getQuestions: async () => {
@@ -38,6 +38,26 @@ const mainService = {
       throw error;
     }
   },
+  getUser : async ()=>{
+   try { 
+    const url = `${BASE_URL}/api/main/get-user`;
+    const token = await authService.getToken();
+    const response = await axios.get(
+      url,
+      {
+       headers :{
+        manobal : token
+       }
+      }
+    )
+    if(response.data.success){      
+      return response.data.user;
+    }
+   } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+   }
+  }
 };
 
 export default mainService;

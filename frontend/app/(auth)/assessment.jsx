@@ -7,8 +7,9 @@ const AssessmentPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [user, setUser] = useState({});
   const navigation = useNavigation();
-  const token = 'your_token_here'; // Replace with actual token
+  
 
   const getQuestions = async () => {
     try {
@@ -18,7 +19,14 @@ const AssessmentPage = () => {
       console.error('Error fetching questions:', error);
     }
   };
-
+  const getUser = async ()=>{
+    try {
+      const user = await mainService.getUser(); //Fetch user
+      setUser(user);
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
+  }
   const handleAnswerSelect = (questionId, answer) => {
     setSelectedAnswers((prevState) => ({
       ...prevState,
@@ -28,13 +36,13 @@ const AssessmentPage = () => {
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex + 1);
     }
   };
 
   const handlePrevQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+      setCurrentQuestionIndex((currentQuestionIndex) => currentQuestionIndex - 1);
     }
   };
 
@@ -66,6 +74,7 @@ const AssessmentPage = () => {
 
   useEffect(() => {
     getQuestions();
+    getUser();
   }, []);
 
   const renderQuestion = ({ item }) => {
@@ -99,7 +108,7 @@ const AssessmentPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.username}>Hi, Prince!</Text>
+        <Text style={styles.username}>Hi {user.name}</Text>
         <Text style={styles.assessmentTitle}>Complete Your Assessment</Text>
       </View>
 

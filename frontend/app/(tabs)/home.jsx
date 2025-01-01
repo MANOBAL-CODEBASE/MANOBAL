@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { FontAwesome5 } from '@expo/vector-icons';
 import CustomButton from '../../components/CustomButton';
 import { router } from 'expo-router';
+import mainService from '../services/mainService';
 
 const Dashboard = () => {
   const progress = 57; // Example progress value
   const strokeDasharray = 2 * Math.PI * 40; // Circle circumference
   const strokeDashoffset = strokeDasharray - (progress / 100) * strokeDasharray;
-
+  const [user,setUser] = useState({});
+  
+  const getUser = async()=>{
+   try {
+    const user = await mainService.getUser();
+    setUser(user);
+   } catch (error) {
+    console.error('Error fetching user:', error);
+   }
+  }
+  useEffect(()=>{
+    getUser();
+  },[] );
   return (
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
-        <Text style={styles.title}>Hi, Prince!</Text>
+        <Text style={styles.title}>Hi {user.name} </Text>
         <Text style={styles.date}>Tue, 2 Dec</Text>
         <FontAwesome5 name="bell" size={20} color="black" style={styles.icon} />
       </View>

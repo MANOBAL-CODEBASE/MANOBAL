@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const questionModel = require('../models/questionModel');
 const scoreModel = require('../models/scoreModel');
+const userModel = require('../models/userModel');
 
 const assessment = async (req, res) => {
   try {
@@ -61,6 +62,7 @@ const assessment = async (req, res) => {
     }
     const userScore = new scoreModel({ userEmail, scores: result });
     await userScore.save();
+    await userModel.updateOne({ email: userEmail }, { isAssesmentDone: true });
 
     return res.status(200).send({
       success: true,
@@ -93,4 +95,27 @@ const questions = async (req, res) => {
   }
 };
 
-module.exports = { assessment, questions };
+const user = async (req, res) => {
+  try {
+    const userEmail = req.user.email;
+    const user = await userModel.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(400).send({
+        success: false,
+        message: 'This user is not registered!',
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: 'User fetched sucessfuly!',
+      user: user,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { assessment, questions, user };
