@@ -38,26 +38,41 @@ const mainService = {
       throw error;
     }
   },
-  getUser : async ()=>{
-   try { 
-    const url = `${BASE_URL}/api/main/get-user`;
-    const token = await authService.getToken();
-    const response = await axios.get(
-      url,
-      {
-       headers :{
-        manobal : token
-       }
+  getUser: async () => {
+    try {
+      const url = `${BASE_URL}/api/main/get-user`;
+      const token = await authService.getToken();
+      const response = await axios.get(url, {
+        headers: {
+          manobal: token,
+        },
+      });
+      if (response.data.success) {
+        return response.data.user;
       }
-    )
-    if(response.data.success){      
-      return response.data.user;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      throw error;
     }
-   } catch (error) {
-    console.error('Error fetching user:', error);
-    throw error;
-   }
-  }
+  },
+  getScore: async () => {
+    try {
+      const url = `${BASE_URL}/api/main/get-score`;
+      const token = await authService.getToken();
+      const response = await axios.get(url, {
+        headers: {
+          manobal: token,
+        },
+      });
+      if(response.data.success){
+        return response.data.score.scores;
+      }
+    }
+    catch (error) {
+      console.error('Error fetching user:', error);
+      throw error;
+    }
+  },
 };
 
 export default mainService;

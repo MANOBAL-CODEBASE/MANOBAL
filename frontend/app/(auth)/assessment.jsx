@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import mainService from '../services/mainService';
+import { router } from 'expo-router';
 
 const AssessmentPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -60,7 +61,7 @@ const AssessmentPage = () => {
 
       try {
         await mainService.assessment(formattedAnswers);
-        navigation.navigate('plan'); // Assuming you navigate to 'plan' after submitting
+        router.push('/home') // Assuming you navigate to 'home' after submitting
       } catch (error) {
         Alert.alert('Error', 'There was an issue submitting your answers.');
       }
@@ -131,7 +132,7 @@ const AssessmentPage = () => {
           <Text style={styles.navButtonText}>Previous</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.navButton}
+          style={[styles.navButton ,isAllAnswered() && styles.disabledButton]}
           onPress={handleNextQuestion}
           disabled={currentQuestionIndex === questions.length - 1}
         >

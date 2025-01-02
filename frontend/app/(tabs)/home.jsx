@@ -7,11 +7,11 @@ import { router } from 'expo-router';
 import mainService from '../services/mainService';
 
 const Dashboard = () => {
-  const progress = 57; // Example progress value
+  //const progress = 57; // Example progress value
   const strokeDasharray = 2 * Math.PI * 40; // Circle circumference
   const strokeDashoffset = strokeDasharray - (progress / 100) * strokeDasharray;
   const [user,setUser] = useState({});
-  
+  const [progress, setProgress] = useState(0);
   const getUser = async()=>{
    try {
     const user = await mainService.getUser();
@@ -20,8 +20,23 @@ const Dashboard = () => {
     console.error('Error fetching user:', error);
    }
   }
+  const getScore = async()=>{
+    try {
+      const scores = await mainService.getScore();
+      const values = Object.values(scores); // reduce object to array
+      let sum =0;
+      values.forEach((value)=>{
+         sum += value;
+      })
+      setProgress(sum*4);
+    } catch (error) {
+      console.error('Error fetching score:', error);
+      
+    }
+  }
   useEffect(()=>{
     getUser();
+    getScore();
   },[] );
   return (
     <View style={styles.container}>
@@ -60,33 +75,9 @@ const Dashboard = () => {
         <Text style={styles.progressText}>{progress}%</Text>
       </View>
 
-      {/* Info Section */}
-      <View style={styles.infoGrid}>
-        <View style={styles.infoBox}>
-          <FontAwesome5 name="calendar-alt" size={24} color="#ff5c5c" />
-          {/* <FontAwesomeIcon icon="fa-duotone fa-solid fa-calendar" /> */}
 
-          <Text style={styles.infoText}>7 days</Text>
-          <Text style={styles.infoValue}>Plan</Text>
-        </View>
-        <View style={styles.infoBox}>
-          <FontAwesome5 name="calendar-alt" size={24} color="#ff7f50" />
-          <Text style={styles.infoText}>14 days</Text>
-          <Text style={styles.infoValue}>Plan</Text>
-        </View>
-        <View style={styles.infoBox}>
-          <FontAwesome5 name="calendar-alt" size={24} color="#ffa500" />
-          <Text style={styles.infoText}>21 days</Text>
-          <Text style={styles.infoValue}>Plan</Text>
-        </View>
-        <View style={styles.infoBox}>
-          <FontAwesome5 name="calendar-alt" size={24} color="#4caf50" />
-          <Text style={styles.infoText}>28 days</Text>
-          <Text style={styles.infoValue}>Plan</Text>
-        </View>
-      </View>
       <CustomButton
-        title="Go to Assessment"
+        title="Give Assessment Again"
         handlePress={() => router.push('/assessment')}
       />
     </View>
@@ -127,6 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#c5d6fc',
     borderRadius: 10,
     padding: 20,
+    marginBottom :20
   },
   progressTitle: {
     fontSize: 28,

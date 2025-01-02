@@ -13,7 +13,7 @@ const assessment = async (req, res) => {
         message: 'Invalid input: answers must be an array.',
       });
     }
-    
+
     const traits = {
       Openness: [],
       Conscientiousness: [],
@@ -118,4 +118,27 @@ const user = async (req, res) => {
   }
 };
 
-module.exports = { assessment, questions, user };
+const score = async (req, res) => {
+  try {
+    const userEmail = req.user.email;
+    const userScore = await scoreModel.findOne({ userEmail });
+    if (!userScore) {
+      return res.status(400).send({
+        success: false,
+        message: 'Score is not calculated yet!',
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: 'Score fetched sucessfuly!',
+      score: userScore,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { assessment, questions, user, score };
