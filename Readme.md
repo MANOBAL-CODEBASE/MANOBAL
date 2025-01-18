@@ -1,0 +1,1 @@
+# MANOBAL - Empowering personal growth through tailored personality development based on self-assessments, helping users build confidence, communication, and leadership skills.
