@@ -64,7 +64,7 @@ const TabsLayout = () => {
             ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="leaderboard"
           options={{
             title: 'Leaderboard',
@@ -78,7 +78,7 @@ const TabsLayout = () => {
               />
             ),
           }}
-        />
+        /> */}
         <Tabs.Screen
           name="community"
           options={{

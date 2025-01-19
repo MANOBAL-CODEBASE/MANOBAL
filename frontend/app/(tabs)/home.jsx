@@ -34,6 +34,18 @@ const Dashboard = () => {
       
     }
   }
+  const getDate = () => {
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const date = new Date();
+  
+    const day = days[date.getDay()]; // Short day name (e.g., "Tue")
+    const dd = String(date.getDate()).padStart(2, "0"); // Day of the month, padded to 2 digits
+    const month = months[date.getMonth()]; // Short month name (e.g., "Jan")
+  
+    return `${day}, ${dd} ${month}`;
+  };
+  
   useEffect(()=>{
     getUser();
     getScore();
@@ -42,8 +54,8 @@ const Dashboard = () => {
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
-        <Text style={styles.title}>Hi {user.name} </Text>
-        <Text style={styles.date}>Tue, 2 Dec</Text>
+        <Text>Hi, <Text style={styles.title}>{user.name}</Text> </Text>
+        <Text style={styles.date}>{getDate()}</Text>
         <FontAwesome5 name="bell" size={20} color="black" style={styles.icon} />
       </View>
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authService from './authServices';
 
-const BASE_URL = 'http://192.168.1.5:4000';
+const BASE_URL = 'http://192.168.1.37:4000';
 
 const mainService = {
   getQuestions: async () => {
