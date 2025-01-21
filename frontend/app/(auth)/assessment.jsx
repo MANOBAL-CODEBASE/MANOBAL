@@ -240,9 +240,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   navigationButtons: {
+    marginTop:20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 120,
+    marginBottom: 100,
   },
   navButton: {
     backgroundColor: '#0056D2',
