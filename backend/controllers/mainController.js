@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const questionModel = require('../models/questionModel');
 const scoreModel = require('../models/scoreModel');
 const userModel = require('../models/userModel');
+const postModel = require('../models/postModel');
 
 const assessment = async (req, res) => {
   try {
@@ -141,4 +142,95 @@ const score = async (req, res) => {
   }
 };
 
-module.exports = { assessment, questions, user, score };
+const posts = async (req, res) => {
+  try {
+    const posts = await postModel.find().sort({ createdAt: -1 });
+    return res.status(200).send({
+      success: true,
+      message: 'posts fetched sucessfuly!',
+      posts: posts,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const myposts = async (req, res) => {
+  try {
+    const posts = await postModel
+      .find({ author: req.user.email })
+      .sort({ createdAt: -1 });
+    return res.status(200).send({
+      success: true,
+      message: 'posts fetched sucessfuly!',
+      posts: posts,
+    });
+  } catch (err) {
+    return res.status(400).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const createpost = async (req, res) => {
+  try {
+    if (!req.body.title || !req.body.content) {
+      return res.status(400).json({ error: 'Title and content are required' });
+    }
+
+    const post = await postModel({
+      title: req.body.title,
+      content: req.body.content,
+      author: req.user.email,
+    });
+    post.save();
+
+    return res.status(200).send({
+      success: true,
+      message: 'Post created sucessfuly!',
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const deletepost = async (req, res) => {
+  const { postId } = req.params;
+
+  try {
+    const deletedPost = await postModel.findByIdAndDelete(postId);
+    if (!deletedPost) {
+      return res.status(400).send({
+        success: false,
+        message: 'This post is not registered!',
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: 'Post deleted sucessfuly!',
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = {
+  assessment,
+  questions,
+  user,
+  score,
+  posts,
+  myposts,
+  createpost,
+  deletepost
+};

@@ -64,15 +64,96 @@ const mainService = {
           manobal: token,
         },
       });
-      if(response.data.success){
+      if (response.data.success) {
         return response.data.score.scores;
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error('Error fetching user:', error);
       throw error;
     }
   },
+  fetchPosts: async () => {
+    try {
+      const url = `${BASE_URL}/api/main/fetch-posts`;
+      const token = await authService.getToken();
+      const response = await axios.get(url, {
+        headers: {
+          manobal: token,
+        },
+      });
+      if (response.data.success) {
+        return response.data.posts;
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      throw error;
+    }
+  },
+  createPost: async (postData) => {
+    try {
+      const url = `${BASE_URL}/api/main/create-post`;
+      const token = await authService.getToken();
+
+      const response = await axios.post(url, postData, {
+        headers: {
+          manobal: token,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response) {
+        return response.data;
+      } else {
+        throw new Error('Failed to create post');
+      }
+    } catch (error) {
+      console.error('Error creating post:', error);
+      throw error;
+    }
+  },
+  fetchMyPosts: async () => {
+    try {
+      const url = `${BASE_URL}/api/main/fetch-my-posts`;
+      const token = await authService.getToken();
+      const response = await axios.get(url, {
+        headers: {
+          manobal: token,
+        },
+      });
+      if (response) {
+        return response.data;
+      } else {
+        throw new Error('Failed to fetch post');
+      }
+    } catch (error) {
+      console.error('Error fetching post:', error);
+      throw error;
+    }
+  },
+  deletePost: async (postId) => {
+    try {
+      const url = `${BASE_URL}/api/main/delete-post/${postId}`;
+      console.log(url);
+  
+      const token = await authService.getToken();
+  
+      const response = await axios.delete(url, {
+        headers: {
+          manobal: token, 
+        },
+      });
+  
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        throw new Error('Failed to delete post');
+      }
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      throw error;
+    }
+  }
+  
+  
 };
 
 export default mainService;

@@ -19,7 +19,9 @@ const RootLayout = () => {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      
+      <Stack.Screen name="createpost" options={{ headerShown: false }} />
+      <Stack.Screen name="allmineposts" options={{ headerShown: false }} />
+      <Stack.Screen name="viewprofile" options={{ headerShown: false }} />
     </Stack>
   );
 };

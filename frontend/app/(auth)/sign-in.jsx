@@ -43,7 +43,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
+      <Text style={styles.title}>Welcome Back !</Text>
 
       <TextInput
         style={styles.input}
@@ -67,7 +67,7 @@ const LoginScreen = () => {
         disabled={isLoading}
       >
         <Text style={styles.buttonText}>
-          {isLoading ? 'Loading...' : 'Login'}
+          {isLoading ? 'Loading...' : 'Sign In'}
         </Text>
       </TouchableOpacity>
 
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
     backgroundColor: '#f4f4f4',
   },
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#a34100',
+    backgroundColor: '#0056D2',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
   footerText2: {
     marginTop: 25,
     fontSize: 14,
-    color: '#800000',
+    color: '#0056D2',
   },
 });
 // #007bff

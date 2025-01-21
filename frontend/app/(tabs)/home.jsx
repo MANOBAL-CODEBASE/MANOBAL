@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Modal, Pressable, TouchableOpacity } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';  // Keeping the progress circle intact
+import { MaterialCommunityIcons } from 'react-native-vector-icons'; // For user avatar
 import CustomButton from '../../components/CustomButton';
 import { router } from 'expo-router';
 import mainService from '../services/mainService';
-import {
-  LineChart
-} from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from 'react-native';
 
 const Dashboard = () => {
@@ -15,6 +13,7 @@ const Dashboard = () => {
   const [user, setUser] = useState({});
   const [progress, setProgress] = useState(0);
   const [score, setScore] = useState([5,5,5,5,5,5]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const getUser = async () => {
     try {
@@ -49,6 +48,19 @@ const Dashboard = () => {
     return `${day}, ${dd} ${month}`;
   };
 
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log('Logging out...');
+    // Close the modal
+    setModalVisible(false);
+  };
+
+  const handleViewProfile = () => {
+    // Navigate to profile page
+    router.push('/viewprofile');
+    setModalVisible(false);
+  };
+
   useEffect(() => {
     getUser();
     getScore();
@@ -60,8 +72,32 @@ const Dashboard = () => {
       <View style={styles.header}>
         <Text style={styles.smallTitle}>Hi, <Text style={styles.boldName}>{user.name}</Text></Text>
         <Text style={styles.date}>{getDate()}</Text>
-        <FontAwesome5 name="bell" size={20} color="black" style={styles.icon} />
+
+        {/* Avatar with Options */}
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
+          {/* User Icon (Default avatar) */}
+          <MaterialCommunityIcons name="account-circle" size={30} color="black" style={styles.avatarIcon} />
+        </TouchableOpacity>
       </View>
+
+      {/* Modal for Profile and Logout Options */}
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <Pressable style={styles.modalOverlay} onPress={() => setModalVisible(false)}>
+          <Pressable style={styles.modalContainer}>
+            <Pressable style={styles.modalOption} onPress={handleViewProfile}>
+              <Text style={styles.modalText}>View Profile</Text>
+            </Pressable>
+            <Pressable style={styles.modalOption} onPress={handleLogout}>
+              <Text style={styles.modalText}>Logout</Text>
+            </Pressable>
+          </Pressable>
+        </Pressable>
+      </Modal>
 
       {/* Progress Section */}
       <View style={styles.progressSection}>
@@ -92,18 +128,14 @@ const Dashboard = () => {
       </View>
 
       <View style={styles.barChart}>
-      <Text style={[styles.progressTitle,styles.mb3]}>Individual Performance</Text>
+        <Text style={[styles.progressTitle, styles.mb3]}>Individual Performance</Text>
         <LineChart
           data={{
             labels: ["Openness", "Conscientiousness", "Extraversion", "Agreeableness", "Neuroticism"],
-            datasets: [
-              {
-                data: score
-              }
-            ]
+            datasets: [{ data: score }]
           }}
           width={Dimensions.get("window").width - 35}
-          height={280}
+          height={285}
           yAxisInterval={1}
           chartConfig={{
             backgroundColor: "#f7f7f7",
@@ -112,14 +144,8 @@ const Dashboard = () => {
             decimalPlaces: 2,
             color: (opacity = 1) => `rgba(76, 175, 80, ${opacity})`, // Green shades
             labelColor: (opacity = 1) => `rgba(60, 60, 60, ${opacity})`,
-            style: {
-              borderRadius: 5
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#66bb6a"
-            }
+            style: { borderRadius: 5 },
+            propsForDots: { r: "6", strokeWidth: "2", stroke: "#66bb6a" }
           }}
           bezier
           style={styles.chartStyle}
@@ -127,6 +153,7 @@ const Dashboard = () => {
           xLabelsOffset={30}
         />
       </View>
+
       <CustomButton
         title="Give Assessment Again"
         handlePress={() => router.push('/assessment')}
@@ -140,10 +167,10 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontFamily: 'System',
     color: '#0056D2',
-    fontWeight: 900,
+    fontWeight: 'bold',
   },
-  mb3:{
-    marginBottom:10
+  mb3: {
+    marginBottom: 10
   },
   container: {
     flex: 1,
@@ -156,11 +183,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 22,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#333',
-  },
   smallTitle: {
     fontSize: 22,
     fontWeight: 'bold',
@@ -170,7 +192,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
   },
-  icon: {
+  avatarIcon: {
     marginLeft: 10,
   },
   progressSection: {
@@ -197,16 +219,46 @@ const styles = StyleSheet.create({
     left: 167,
   },
   chartStyle: {
-    marginBottom:16,
+    marginBottom: 16,
     borderRadius: 16,
   },
-  barChart:{
+  barChart: {
     alignItems: 'center',
     marginTop: 5,
     backgroundColor: '#e8f5e9',
     borderRadius: 10,
     padding: 5,
     marginBottom: 10,
+  },
+
+  /* Styling for modal to make it classy */
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+  },
+  modalContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 20,
+    width: '80%',
+    elevation: 5, // Adds shadow for Android
+    shadowColor: "#000", // Adds shadow for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+  },
+  modalOption: {
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  modalText: {
+    fontSize: 18,
+    color: '#333',
+    textAlign: 'center',
+    fontWeight: '500', // Gives it a refined look
   }
 });
 

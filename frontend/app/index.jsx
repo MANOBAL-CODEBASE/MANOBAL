@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   logo: {
-    height: 450,
-    width:400, // Rounded corners (half of width/height for circle)
+    height: 350,
+    width:350, // Rounded corners (half of width/height for circle)
   },
   btn: {
     width: 270,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize:30,
     textAlign:'center',
     fontWeight:800,
-    color:'#a34100'
+    color:'#0056D2'
   },
   topBox:{
     paddingBottom:24
