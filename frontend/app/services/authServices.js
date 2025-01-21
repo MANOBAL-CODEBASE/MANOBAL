@@ -29,7 +29,7 @@ const authService = {
     try {
       const token = await AsyncStorage.getItem('manobal');
       if (token !== null) {
-        console.log('Retrieved token:', token);
+        console.log('Retrieved token');
         return token; // Successfully retrieved token
       } else {
         console.log('Token not found');

@@ -10,7 +10,6 @@ const AssessmentPage = () => {
   const [questions, setQuestions] = useState([]);
   const [user, setUser] = useState({});
   const navigation = useNavigation();
-  
 
   const getQuestions = async () => {
     try {
@@ -20,14 +19,16 @@ const AssessmentPage = () => {
       console.error('Error fetching questions:', error);
     }
   };
-  const getUser = async ()=>{
+
+  const getUser = async () => {
     try {
-      const user = await mainService.getUser(); //Fetch user
+      const user = await mainService.getUser(); // Fetch user
       setUser(user);
     } catch (error) {
       console.error('Error fetching user:', error);
     }
-  }
+  };
+
   const handleAnswerSelect = (questionId, answer) => {
     setSelectedAnswers((prevState) => ({
       ...prevState,
@@ -61,7 +62,7 @@ const AssessmentPage = () => {
 
       try {
         await mainService.assessment(formattedAnswers);
-        router.push('/home') // Assuming you navigate to 'home' after submitting
+        router.push('/home'); // Assuming you navigate to 'home' after submitting
       } catch (error) {
         Alert.alert('Error', 'There was an issue submitting your answers.');
       }
@@ -91,7 +92,14 @@ const AssessmentPage = () => {
             ]}
             onPress={() => handleAnswerSelect(item.id, option)}
           >
-            <Text style={styles.optionText}>{option}</Text>
+            <Text
+              style={[
+                styles.optionText,
+                selectedAnswers[item.id] === option && styles.selectedOptionText,
+              ]}
+            >
+              {option}
+            </Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -109,7 +117,7 @@ const AssessmentPage = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.username}>Hi {user.name}</Text>
+        <Text style={styles.username}>Hi, <Text style={styles.boldName}>{user.name}</Text></Text>
         <Text style={styles.assessmentTitle}>Complete Your Assessment</Text>
       </View>
 
@@ -129,14 +137,14 @@ const AssessmentPage = () => {
           onPress={handlePrevQuestion}
           disabled={currentQuestionIndex === 0}
         >
-          <Text style={styles.navButtonText}>Previous</Text>
+          <Text style={styles.navButtonText}>{'<'}</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.navButton ,isAllAnswered() && styles.disabledButton]}
+          style={[styles.navButton, isAllAnswered() && styles.disabledButton]}
           onPress={handleNextQuestion}
           disabled={currentQuestionIndex === questions.length - 1}
         >
-          <Text style={styles.navButtonText}>Next</Text>
+          <Text style={styles.navButtonText}>{'>'}</Text>
         </TouchableOpacity>
       </View>
 
@@ -152,13 +160,20 @@ const AssessmentPage = () => {
 };
 
 const styles = StyleSheet.create({
+  boldName: {
+    fontSize: 35,
+    fontFamily: 'System',
+    color: '#0056D2',
+    fontWeight: 900,
+  },
   container: {
     flex: 1,
     padding: 20,
     backgroundColor: '#f9f9f9',
   },
   header: {
-    marginBottom: 20,
+    marginTop: 15,
+    marginBottom: 5,
     alignItems: 'center',
   },
   username: {
@@ -187,11 +202,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.6,
     shadowRadius: 5,
     elevation: 6,
-    width: 320,
+    width: 350,
     alignItems: 'center',
   },
   questionText: {
-    fontSize: 18,
+    fontSize: 26,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 10,
@@ -209,15 +224,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#007bff',
-    width: '100%',
+    borderColor: '#0056D2',
+    width: '80%',
   },
   selectedOption: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#0056D2', // Background color of selected option
+  },
+  selectedOptionText: {
+    color: 'white',
+    fontWeight:700 // White text color when selected
   },
   optionText: {
     fontSize: 16,
-    color: '#333',
+    color: '#000', // Default color
     textAlign: 'center',
   },
   navigationButtons: {
@@ -226,18 +245,20 @@ const styles = StyleSheet.create({
     marginBottom: 120,
   },
   navButton: {
-    backgroundColor: '#007bff',
-    padding: 10,
+    backgroundColor: '#0056D2',
+    padding: 5,
+    paddingBottom: 9,
     borderRadius: 5,
-    width: 120,
+    width: 60,
     alignItems: 'center',
   },
   navButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 26,
+    fontWeight: 900,
   },
   submitButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#0056D2',
     padding: 15,
     borderRadius: 10,
     marginTop: 20,
