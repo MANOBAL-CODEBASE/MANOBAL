@@ -3,6 +3,8 @@ const questionModel = require('../models/questionModel');
 const scoreModel = require('../models/scoreModel');
 const userModel = require('../models/userModel');
 const postModel = require('../models/postModel');
+const prevTaskModel = require('../models/prevtasksModel');
+const TaskModel = require('../models/tasksModel');
 
 const assessment = async (req, res) => {
   try {
@@ -224,6 +226,89 @@ const deletepost = async (req, res) => {
   }
 };
 
+const getnexttask = async (req, res) => {
+  try {
+    const orderList = [
+      'openness',
+      'conscientiousness',
+      'extraversion',
+      'agreeableness',
+      'neuroticism',
+    ];
+
+    const userEmail = req.user.email;
+
+    // Fetch user score
+    const userScore = await scoreModel.findOne({ userEmail });
+    if (!userScore) {
+      return res.status(400).send({
+        success: false,
+        message: 'Score is not registered!',
+      });
+    }
+
+    // Calculate sum of scores
+    const scores = userScore.scores;
+    const sumScore = Object.values(scores).reduce(
+      (acc, score) => acc + score,
+      0
+    );
+
+    // Determine user level based on score sum
+    let userLevel = '';
+    if (sumScore >= 1 && sumScore <= 12) {
+      userLevel = 'beginner';
+    } else if (sumScore >= 13 && sumScore <= 18) {
+      userLevel = 'intermediate';
+    } else if (sumScore >= 19 && sumScore <= 20) {
+      userLevel = 'advanced';
+    }
+
+    // Pick a random trait
+    const choosenTrait =
+      orderList[Math.floor(Math.random() * orderList.length)];
+
+    // Fetch user's previously completed tasks
+    // Fetch all documents for the user
+    const prevTasks = await prevTaskModel.find({ userEmail });
+
+    // Extract the list of completed task IDs
+    const prevCompletedTasks =
+      prevTasks.length > 0 ? prevTasks.map((task) => task.taskId) : [];
+      console.log(prevCompletedTasks)
+
+      console.log(userLevel,choosenTrait)
+    // Find a new task
+    const newTask = await TaskModel.findOne({
+      _id: { $nin: prevCompletedTasks }, // Exclude previously completed tasks
+      level: userLevel, // Match the user level
+      trait: choosenTrait, // Match the chosen trait
+    });
+
+    console.log(newTask)
+    
+
+    if (!newTask) {
+      return res.status(404).send({
+        success: false,
+        message: 'No suitable task found for the user!',
+      });
+    }
+
+    // Send the task back to the user
+    return res.status(200).send({
+      success: true,
+      message: 'Task successfully fetched!',
+      task: newTask,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   assessment,
   questions,
@@ -232,5 +317,6 @@ module.exports = {
   posts,
   myposts,
   createpost,
-  deletepost
+  deletepost,
+  getnexttask,
 };

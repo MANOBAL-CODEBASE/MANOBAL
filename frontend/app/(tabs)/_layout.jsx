@@ -64,21 +64,21 @@ const TabsLayout = () => {
             ),
           }}
         />
-        {/* <Tabs.Screen
-          name="leaderboard"
+        <Tabs.Screen
+          name="tasks"
           options={{
-            title: 'Leaderboard',
+            title: 'Tasks',
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 icon={icons.leaderboard}
                 color={color}
-                name="Leaderboard"
+                name="tasks"
                 focused={focused}
               />
             ),
           }}
-        /> */}
+        />
         <Tabs.Screen
           name="community"
           options={{
