@@ -58,11 +58,11 @@ const contact = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Feedback Form</Text>
 
-      {/ Star Rating /}
+      {/* Star Rating */}
       <Text style={styles.label}>Rate Us:</Text>
       <View style={styles.starContainer}>{renderStars()}</View>
 
-      {/ Feedback Type /}
+      {/* Feedback Type */}
       <Text style={styles.label}>Feedback Type:</Text>
       <View style={styles.pickerContainer}>
         <Picker
@@ -76,7 +76,7 @@ const contact = () => {
         </Picker>
       </View>
 
-      {/ Additional Comments /}
+      {/* Additional Comments */}
       <Text style={styles.label}>Comments:</Text>
       <TextInput
         style={styles.textInput}
@@ -86,7 +86,7 @@ const contact = () => {
         multiline
       />
 
-      {/ Submit Button /}
+      {/* Submit Button */}
       <TouchableOpacity style={styles.submitButton} onPress={submitFeedback}>
         <Text style={styles.submitText}>Submit</Text>
       </TouchableOpacity>
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
+    marginTop:30
   },
   label: {
     fontSize: 16,
