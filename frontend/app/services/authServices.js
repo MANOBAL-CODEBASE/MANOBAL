@@ -25,6 +25,16 @@ const authService = {
       throw error;
     }
   },
+  logout: async () => {
+    try {
+      // Clear all stored data in AsyncStorage
+      await AsyncStorage.clear();
+      console.log('User logged out and storage cleared');
+    } catch (error) {
+      console.error('Error during logout:', error);
+      throw error; // Re-throw the error if needed
+    }
+  },  
   getToken: async () => {
     try {
       const token = await AsyncStorage.getItem('manobal');

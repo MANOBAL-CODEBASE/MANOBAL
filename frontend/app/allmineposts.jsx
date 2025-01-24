@@ -69,12 +69,13 @@ const MyPosts = () => {
         style={styles.deleteButton}
         onPress={() => handleDeletePost(item._id)}
       >
-        <MaterialIcons
-          name="delete"
-          size={20}
-          color="white"
-          style={styles.deleteIcon}
-        />
+        <View style={styles.iconWrapper}>
+          <MaterialIcons
+            name="delete"
+            size={20}
+            color="white"
+          />
+        </View>
       </TouchableOpacity>
     </View>
   );
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     marginTop: 35,
-    backgroundColor: '#e8f5e9',
   },
   headerContainer: {
     flexDirection: 'row',
@@ -154,10 +154,19 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     backgroundColor: '#d32f2f',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 5,
+    padding: 5, // Adjust the padding to create space around the icon
+    borderRadius: 20, // Makes the button circular
     alignSelf: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  iconWrapper: {
+    width: 30, // Set width for the circular wrapper
+    height: 30, // Set height for the circular wrapper
+    borderRadius: 15, // Ensures it’s perfectly round
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   deleteButtonText: {
     color: '#fff',

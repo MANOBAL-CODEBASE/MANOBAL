@@ -11,7 +11,7 @@ import mainImage from "../assets/images/front.png"
 export default function App() {
   return (
   <ImageBackground
-  source={background} style={styles.background} resizeMode="cover"
+  source="" style={styles.background} resizeMode="cover"
   >
       <View style={styles.container}>
       <View style={styles.topBox}>
@@ -31,7 +31,7 @@ export default function App() {
       </View>
       <View style={styles.bs2}>
         <CustomButton
-          containerStyles={styles.btn}
+          containerStyles={[styles.mt8,styles.btn]}
           textStyles={styles.btnText}
           title="Continue without Login"
           handlePress={() => router.push('/home')}
@@ -43,6 +43,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  mt8:{
+    marginTop:8,
+    backgroundColor:'#4bad52'
+  },
   background: {
     flex: 1,
     resizeMode: 'cover', // or 'contain' depending on your need
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
     // elevation: 5, // Elevation for Android
     // borderRadius: 125, // Matches the image's borderRadius for rounded corners
     padding: 6, // Adds some space for shadow visibility
-    marginBottom: 30,
+    marginBottom: 50,
   },
   logo: {
     height: 350,
@@ -90,11 +94,11 @@ const styles = StyleSheet.create({
      fontFamily: 'Roboto',
     fontSize:30,
     textAlign:'center',
-    fontWeight:800,
-    color:'#0056D2'
+    fontWeight:300,
+    color:'#0056D2',
   },
   topBox:{
-    paddingBottom:24
+    paddingBottom:44
   },
   boldName:{
     fontSize:35,

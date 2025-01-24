@@ -38,10 +38,15 @@ const Community = () => {
     <View style={styles.post}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.content}>{item.content}</Text>
-      <Text style={styles.author}>Author Email : {item.author}</Text>
-
+      <View style={styles.authorContainer}>
+        <View style={styles.iconWrapper}>
+          <MaterialIcons name="person" size={20} color="#333" />
+        </View>
+        <Text style={styles.author}>Author Email: {item.author}</Text>
+      </View>
     </View>
   );
+  
 
   const handleAddPost = () => {
     router.push('/createpost');
@@ -82,14 +87,29 @@ const Community = () => {
 };
 
 const styles = StyleSheet.create({
-  author:{
-    marginTop:15,
+  authorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  iconWrapper: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    borderWidth: 2, // Border thickness
+    borderColor: '#0056D2', // Border color
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8, // Space between icon and text
+  },
+  author: {
+    fontWeight: '600',
+    color: '#333',
   },
   container: {
     flex: 1,
     padding: 15,
     marginTop: 35,
-    backgroundColor: '#e8f5e9',
   },
   headerContainer: {
     flexDirection: 'row',
