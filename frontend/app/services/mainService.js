@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authService from './authServices';
 
-const BASE_URL = 'http://192.168.1.5:4000';
+const BASE_URL = 'http://192.168.1.37:4000';
 
 const mainService = {
   getQuestions: async () => {
@@ -149,6 +149,45 @@ const mainService = {
       }
     } catch (error) {
       console.error('Error deleting post:', error);
+      throw error;
+    }
+  },
+  getNextTask: async () => {
+    try {
+      const url = `${BASE_URL}/api/main/get-next-task`;
+      const token = await authService.getToken();
+      const response = await axios.get(url, {
+        headers: {
+          manobal: token,
+        },
+      });
+      if (response.data.success) {
+        return response.data.task; // Return only the task object
+      } else {
+        throw new Error(response.data.message || 'Failed to fetch next task');
+      }
+    } catch (error) {
+      console.error('Error fetching next task:', error);
+      throw error;
+    }
+  },
+
+  completeTask: async () => {
+    try {
+      const url = `${BASE_URL}/api/main/complete-task`;
+      const token = await authService.getToken();
+      const response = await axios.get(url, {
+        headers: {
+          manobal: token,
+        },
+      });
+      if (response.data.success) {
+        return response.data.tasks;
+      } else {
+        throw new Error(response.data.message || 'Failed to fetch completed tasks');
+      }
+    } catch (error) {
+      console.error('Error fetching completed tasks:', error);
       throw error;
     }
   }

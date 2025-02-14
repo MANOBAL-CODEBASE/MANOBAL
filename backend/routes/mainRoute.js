@@ -9,7 +9,8 @@ const {
   myposts,
   createpost,
   deletepost,
-  getnexttask
+  getnexttask,
+  completeTask
 } = require('../controllers/mainController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -22,5 +23,6 @@ mainRouter.get('/fetch-my-posts', authMiddleware, myposts);
 mainRouter.post('/create-post', authMiddleware, createpost);
 mainRouter.delete('/delete-post/:postId', authMiddleware, deletepost);
 mainRouter.get('/get-next-task', authMiddleware, getnexttask);
+mainRouter.get('/complete-task', authMiddleware, completeTask);
 
 module.exports = mainRouter;

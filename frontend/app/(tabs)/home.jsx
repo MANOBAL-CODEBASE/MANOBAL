@@ -258,10 +258,10 @@ const styles = StyleSheet.create({
   },
   progressSection: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 5,
     backgroundColor: '#e3f2fd',
     borderRadius: 10,
-    padding: 20,
+    padding: 10,
     marginBottom: 20,
   },
   progressTitle: {

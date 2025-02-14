@@ -4,6 +4,7 @@ const scoreModel = require('../models/scoreModel');
 const userModel = require('../models/userModel');
 const postModel = require('../models/postModel');
 const prevTaskModel = require('../models/prevtasksModel');
+const userTasksModel = require('../models/userTasksModel')
 const TaskModel = require('../models/tasksModel');
 
 const assessment = async (req, res) => {
@@ -228,17 +229,19 @@ const deletepost = async (req, res) => {
 
 const getnexttask = async (req, res) => {
   try {
-    const orderList = [
-      'openness',
-      'conscientiousness',
-      'extraversion',
-      'agreeableness',
-      'neuroticism',
-    ];
-
+    const orderList = ['openness', 'conscientiousness', 'extraversion', 'agreeableness', 'neuroticism'];
     const userEmail = req.user.email;
 
-    // Fetch user score
+    const existingPendingTask = await userTasksModel.findOne({ userEmail, status: 'pending' }).populate('taskId');
+
+    if (existingPendingTask) {
+      return res.status(200).send({
+        success: true,
+        message: 'You have an ongoing task!',
+        task: existingPendingTask.taskId,
+      });
+    }
+
     const userScore = await scoreModel.findOne({ userEmail });
     if (!userScore) {
       return res.status(400).send({
@@ -247,14 +250,9 @@ const getnexttask = async (req, res) => {
       });
     }
 
-    // Calculate sum of scores
     const scores = userScore.scores;
-    const sumScore = Object.values(scores).reduce(
-      (acc, score) => acc + score,
-      0
-    );
+    const sumScore = Object.values(scores).reduce((acc, score) => acc + score, 0);
 
-    // Determine user level based on score sum
     let userLevel = '';
     if (sumScore >= 1 && sumScore <= 12) {
       userLevel = 'beginner';
@@ -264,29 +262,18 @@ const getnexttask = async (req, res) => {
       userLevel = 'advanced';
     }
 
-    // Pick a random trait
-    const choosenTrait =
-      orderList[Math.floor(Math.random() * orderList.length)];
 
-    // Fetch user's previously completed tasks
-    // Fetch all documents for the user
-    const prevTasks = await prevTaskModel.find({ userEmail });
+    const choosenTrait = orderList[Math.floor(Math.random() * orderList.length)];
 
-    // Extract the list of completed task IDs
-    const prevCompletedTasks =
-      prevTasks.length > 0 ? prevTasks.map((task) => task.taskId) : [];
-      console.log(prevCompletedTasks)
 
-      console.log(userLevel,choosenTrait)
-    // Find a new task
+    const prevCompletedTasks = await userTasksModel.find({ userEmail, status: 'completed' }).distinct('taskId');
+
+
     const newTask = await TaskModel.findOne({
-      _id: { $nin: prevCompletedTasks }, // Exclude previously completed tasks
-      level: userLevel, // Match the user level
-      trait: choosenTrait, // Match the chosen trait
+      _id: { $nin: prevCompletedTasks }, 
+      level: userLevel,
+      trait: choosenTrait, 
     });
-
-    console.log(newTask)
-    
 
     if (!newTask) {
       return res.status(404).send({
@@ -295,7 +282,10 @@ const getnexttask = async (req, res) => {
       });
     }
 
-    // Send the task back to the user
+
+    const assignedTask = new userTasksModel({ userEmail, taskId: newTask._id });
+    await assignedTask.save();
+
     return res.status(200).send({
       success: true,
       message: 'Task successfully fetched!',
@@ -309,6 +299,36 @@ const getnexttask = async (req, res) => {
   }
 };
 
+
+const completeTask = async (req, res) => {
+  try {
+    const userEmail = req.user.email;
+
+    const task = await userTasksModel.findOne({ userEmail, status: 'pending' });
+
+    if (!task) {
+      return res.status(400).send({
+        success: false,
+        message: 'No pending task found for this user!',
+      });
+    }
+    task.status = 'completed';
+    await task.save();
+
+    return res.status(200).send({
+      success: true,
+      message: 'Task marked as completed!',
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
 module.exports = {
   assessment,
   questions,
@@ -319,4 +339,5 @@ module.exports = {
   createpost,
   deletepost,
   getnexttask,
+  completeTask,
 };
