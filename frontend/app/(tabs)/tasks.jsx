@@ -56,7 +56,7 @@ const Tasks = () => {
           <Text style={styles.taskTitle}>{nextTask.title}</Text>
           <Text style={styles.taskDescription}>{nextTask.description}</Text>
           <CustomButton
-            title="Complete Your Next Task"
+            title="Complete Your Task"
             handlePress={completeTask}
             containerStyles={styles.button}
           />

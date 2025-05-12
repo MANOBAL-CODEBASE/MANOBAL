@@ -4,32 +4,71 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  ViewStyle,
+  TextStyle,
 } from 'react-native';
 
-const CustomButton = ({
+interface CustomButtonProps {
+  title: string;
+  handlePress: () => void;
+  containerStyles?: ViewStyle;
+  textStyles?: TextStyle;
+  isLoading?: boolean;
+  variant?: 'primary' | 'secondary' | 'outline';
+  disabled?: boolean;
+}
+
+const CustomButton: React.FC<CustomButtonProps> = ({
   title,
   handlePress,
   containerStyles,
   textStyles,
-  isLoading,
+  isLoading = false,
+  variant = 'primary',
+  disabled = false,
 }) => {
+  const getButtonStyle = () => {
+    switch (variant) {
+      case 'secondary':
+        return styles.secondaryButton;
+      case 'outline':
+        return styles.outlineButton;
+      default:
+        return styles.primaryButton;
+    }
+  };
+
+  const getTextStyle = () => {
+    switch (variant) {
+      case 'secondary':
+        return styles.secondaryText;
+      case 'outline':
+        return styles.outlineText;
+      default:
+        return styles.primaryText;
+    }
+  };
+
   return (
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.7}
       style={[
         styles.buttonContainer,
+        getButtonStyle(),
         containerStyles,
-        isLoading && styles.disabledButton,
+        (isLoading || disabled) && styles.disabledButton,
       ]}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
-      <Text style={[styles.buttonText, textStyles]}>{title}</Text>
+      <Text style={[styles.buttonText, getTextStyle(), textStyles]}>
+        {title}
+      </Text>
 
       {isLoading && (
         <ActivityIndicator
           animating={isLoading}
-          color="#fff"
+          color={variant === 'outline' ? '#0056D2' : '#fff'}
           size="small"
           style={styles.loader}
         />
@@ -40,20 +79,45 @@ const CustomButton = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: '#0056D2',
     borderRadius: 10,
-    minHeight: 62,
+    minHeight: 56,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
+    padding: 12,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  primaryButton: {
+    backgroundColor: '#0056D2',
+  },
+  secondaryButton: {
+    backgroundColor: '#6B7280',
+  },
+  outlineButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#0056D2',
   },
   disabledButton: {
-    opacity: 0.5,
+    opacity: 0.6,
   },
   buttonText: {
-    color: '#fff',
-    fontFamily:'Roboto'
+    fontSize: 16,
+    fontWeight: '600',
+    fontFamily: 'Roboto',
+  },
+  primaryText: {
+    color: '#FFFFFF',
+  },
+  secondaryText: {
+    color: '#FFFFFF',
+  },
+  outlineText: {
+    color: '#0056D2',
   },
   loader: {
     marginLeft: 8,

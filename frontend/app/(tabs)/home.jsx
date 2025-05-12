@@ -83,8 +83,6 @@ const Dashboard = () => {
   };
 
   const handleViewProfile =  () => {
-    // Navigate to profile page
-    
     router.push('/viewprofile');
     setModalVisible(false);
   };
@@ -261,7 +259,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     backgroundColor: '#e3f2fd',
     borderRadius: 10,
-    padding: 10,
+    padding: 12,
     marginBottom: 20,
   },
   progressTitle: {
@@ -269,7 +267,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   progressCircle: {
-    marginTop: 5,
+    marginTop: 10,
   },
   progressText: {
     position: 'absolute',

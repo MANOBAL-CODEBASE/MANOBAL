@@ -17,6 +17,8 @@
     "axios": "^1.7.8",
     "expo": "^51.0.0",
     "expo-constants": "~16.0.2",
+    "expo-image-picker": "^16.1.4",
+    "expo-linear-gradient": "^14.1.4",
     "expo-linking": "~6.3.1",
     "expo-router": "~3.5.24",
     "expo-status-bar": "~1.12.1",
